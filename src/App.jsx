@@ -25,9 +25,15 @@ export const appInfo = {
 }
 // or this!
 
+
 export function App() {
   const { data, categories, restaurants } = Dataset.createDataSet()
-  const [isActive, setIsActive] = useState(false)
+
+  const [isCategory, setCategory] = useState(null)
+  const [isRestaurant, setRestaurant] = useState(null)
+  const [isItem, setItem] = useState(null)
+
+  const currentMenutems = []
 
   return (
     <main className="App">
@@ -37,7 +43,11 @@ export function App() {
           <h2 className="title">Categories</h2>
 
             {categories.map((category) =>
-              <Chip label={category} />
+              <Chip key={category} 
+                    label={category} 
+                    handleClick={setCategory} 
+                    isActive = { isCategory === category ?  true : false}
+                   />
             )}
         </div>
       </div>
@@ -52,7 +62,12 @@ export function App() {
           <h2 className="title">Restaurants</h2>
           <div className="restaurants options">
              {restaurants.map((restaurant) =>
-              <Chip label = {restaurant} />
+              <Chip key={restaurant}
+                    label = {restaurant} 
+                    handleClick={setRestaurant}
+                    isActive = { isRestaurant === restaurant ?  true : false}
+
+              />
              )}
           </div>
         </div>
